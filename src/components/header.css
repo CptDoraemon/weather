@@ -1,0 +1,13 @@
+.header-wrapper {
+    text-transform: capitalize;
+}
+.header-wrapper h1{
+    font-weight: 500;
+    font-size: 24px;
+    margin: 5px 0;
+}
+.header-wrapper h2{
+    font-weight: 500;
+    font-size: 16px;
+    margin: 2px 0;
+}
