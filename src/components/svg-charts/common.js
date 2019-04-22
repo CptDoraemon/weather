@@ -3,13 +3,13 @@ import React from "react";
 function UpperTextInChart(props) {
     const tempTextInactive = {
         fill: 'rgb(150, 150, 150)',
-        fontSize: '12px',
+        fontSize: props.chartFontSize + 'px',
         fontWeight: 700,
         cursor: 'pointer',
     };
     const tempTextStyleActive = {
         fill: 'rgb(0, 0, 0)',
-        fontSize: '12px',
+        fontSize: props.chartFontSize + 'px',
         fontWeight: 700
     };
     const style = props.obj.time === props.selectedDataObj.time ? tempTextStyleActive : tempTextInactive;
@@ -28,7 +28,7 @@ function UpperTextInChart(props) {
 function NoData(props) {
     const style = {
         fill: 'rgba(0, 0, 0, 0.2)',
-        fontSize: '14px',
+        fontSize: props.chartFontSize + 'px',
         fontWeight: 700,
         textTransform: 'uppercase',
     };

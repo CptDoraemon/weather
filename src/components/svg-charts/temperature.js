@@ -59,19 +59,16 @@ export default class HourChartTemperature extends Component {
         })
     }
     render() {
-        // this.props.objArray;
         const lineStyle = {
-            //stroke: 'rgba(29, 161, 242, 0.8)',
             stroke: 'rgba(249, 166, 2, 0.8)',
             strokeWidth: 2
         };
         const fillStyle = {
-            //fill: 'rgba(29, 161, 242, 0.4)'
             fill: 'rgba(249, 166, 2, 0.4)'
         };
         const timeTextStyle = {
             fill: 'rgb(150, 150, 150)',
-            fontSize: '12px'
+            fontSize: this.props.chartFontSize + 'px'
         };
         const lines = (
             <React.Fragment>
@@ -105,6 +102,7 @@ export default class HourChartTemperature extends Component {
                                                     selectedDataObj={this.props.selectedDataObj}
                                                     setSelectedDataObj={this.props.setSelectedDataObj}
                                                     setIsDaySummary={this.props.setIsDaySummary}
+                                                    chartFontSize={this.props.chartFontSize}
                                                 />
                                                 <text x={lastX} y={last.timeText} style={timeTextStyle}>{ hour }</text>
                                             </React.Fragment>
@@ -137,7 +135,7 @@ export default class HourChartTemperature extends Component {
             <React.Fragment>
                 <svg height={this.svgHeight} width={this.svgWidth} style={{transform: `translateX(${svgOffset}px)`}}>
                     { lines }
-                    <NoData wrapperWidth={this.wrapperWidth} svgHeight={this.svgHeight} noDataCenterOffset={noDataCenterOffset}/>
+                    <NoData wrapperWidth={this.wrapperWidth} svgHeight={this.svgHeight} noDataCenterOffset={noDataCenterOffset} chartFontSize={this.props.chartFontSize}/>
                 </svg>
             </React.Fragment>
         );

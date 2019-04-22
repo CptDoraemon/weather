@@ -29,6 +29,7 @@ export default class HourChart extends Component {
         this.state = {
             mode: 'temperature', // temperature, precipitation, wind
             wrapperWidth: null,
+            fontSize: 12,
             isReady: false
         };
         this.setMode = this.setMode.bind(this);
@@ -42,12 +43,18 @@ export default class HourChart extends Component {
     componentDidMount() {
         const wrapperStyle = window.getComputedStyle(this.wrapperRef.current, null);
         const wrapperWidth = window.parseInt(wrapperStyle.getPropertyValue("width"));
+        const chartFontSize = window.innerWidth > 500 ? 12 : 8;
         this.setState({
             wrapperWidth: wrapperWidth,
+            chartFontSize: chartFontSize,
             isReady: true
         })
     }
     render() {
+        const chartProps = {
+            wrapperWidth: this.state.wrapperWidth,
+            chartFontSize: this.state.chartFontSize,
+        };
         return (
             <div className='hour-chart-wrapper' ref={this.wrapperRef}>
                 <HourChartSwitcher setMode={this.setMode} mode={this.state.mode}/>
@@ -55,10 +62,10 @@ export default class HourChart extends Component {
                     !this.state.isReady
                         ? null
                         : this.state.mode === 'temperature'
-                    ? <HourChartTemperature wrapperWidth={this.state.wrapperWidth} {...this.props}/>
+                    ? <HourChartTemperature {...chartProps} {...this.props}/>
                         : this.state.mode === 'precipitation'
-                            ? <HourChartPrecipitation wrapperWidth={this.state.wrapperWidth} {...this.props}/>
-                            : <HourChartWind wrapperWidth={this.state.wrapperWidth} {...this.props}/>
+                            ? <HourChartPrecipitation {...chartProps} {...this.props}/>
+                            : <HourChartWind {...chartProps} {...this.props}/>
 
                 }
             </div>

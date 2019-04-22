@@ -66,7 +66,7 @@ export default class HourChartPrecipitation extends Component {
         };
         const timeTextStyle = {
             fill: 'rgb(150, 150, 150)',
-            fontSize: '12px'
+            fontSize: this.props.chartFontSize+'px'
         };
         const lines = (
             <React.Fragment>
@@ -99,6 +99,7 @@ export default class HourChartPrecipitation extends Component {
                                                     selectedDataObj={this.props.selectedDataObj}
                                                     setSelectedDataObj={this.props.setSelectedDataObj}
                                                     setIsDaySummary={this.props.setIsDaySummary}
+                                                    chartFontSize={this.props.chartFontSize}
                                                 />
                                                 <text x={lastX} y={last.timeText} style={timeTextStyle}>{ hour }</text>
                                             </React.Fragment>
@@ -131,7 +132,7 @@ export default class HourChartPrecipitation extends Component {
             <React.Fragment>
                 <svg height={this.svgHeight} width={this.svgWidth} style={{transform: `translateX(${svgOffset}px)`}}>
                     { lines }
-                    <NoData wrapperWidth={this.wrapperWidth} svgHeight={this.svgHeight} noDataCenterOffset={noDataCenterOffset}/>
+                    <NoData wrapperWidth={this.wrapperWidth} svgHeight={this.svgHeight} noDataCenterOffset={noDataCenterOffset} chartFontSize={this.props.chartFontSize}/>
                 </svg>
             </React.Fragment>
         );
