@@ -24,6 +24,7 @@
     justify-content: center;
 }
 .attributions-wrapper {
+    margin-top: 5px;
     font-size: 12px;
     display: flex;
     flex-direction: column;

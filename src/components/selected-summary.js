@@ -9,12 +9,12 @@ function UnitSwitcher(props) {
             {/*c*/}
             <span
                 className={!props.isCelsius ? 'unit-switcher-button-inactive' : 'unit-switcher-button-active'}
-                onClick={() => props.unitSwitcher(false)}>&#8451;</span>
+                onClick={() => props.unitSwitcher(false)}>&#176;C</span>
             <span> | </span>
             {/*f*/}
             <span
                 onClick={() => props.unitSwitcher(true)}
-                className={props.isCelsius ? 'unit-switcher-button-inactive' : 'unit-switcher-button-active'}>&#8457;</span>
+                className={props.isCelsius ? 'unit-switcher-button-inactive' : 'unit-switcher-button-active'}>&#176;F</span>
         </div>
     )
 }
@@ -47,7 +47,7 @@ export default class SelectedSummary extends Component {
         const humidity = Math.round(this.props.selectedDataObj.humidity * 100);
         //
         const mph = this.props.selectedDataObj.windSpeed;
-        const windSpeed = this.props.isCelsius ? this.props.mphToKmh(mph) + ' km/h': mph + ' mph';
+        const windSpeed = this.props.isCelsius ? Math.round(this.props.mphToKmh(mph)) + ' km/h': Math.round(mph) + ' mph';
 
         return (
             <div className='selected-summary-wrapper quarter-height-wrapper'>

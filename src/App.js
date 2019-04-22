@@ -32,7 +32,7 @@ class AppLoaded extends Component {
         return ((f - 32) * 5/9);
     }
     mphToKmh(mph) {
-        return (mph / 1.609).toFixed(2);
+        return (mph / 1.609);
     }
     unitSwitcher(isCelsiusNow) {
         this.setState({isCelsius: !isCelsiusNow})
@@ -67,7 +67,11 @@ class AppLoaded extends Component {
             <React.Fragment>
                 <Header {...injectProps}/>
                 <SelectedSummary {...injectProps}/>
-                <HourChart />
+                <HourChart
+                    objArray={this.props.weatherData.hourly.data}
+                    isCelsius={this.state.isCelsius}
+                    fToC={this.fToC}
+                />
 
                 <DayChart
                     objArray={this.props.weatherData.daily.data}
