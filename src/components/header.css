@@ -1,10 +1,12 @@
 .header-wrapper {
     text-transform: capitalize;
+    width: calc(100% - 20px);
+    margin: 0 10px;
 }
 .header-wrapper h1{
     font-weight: 500;
     font-size: 24px;
-    margin: 5px 0;
+    margin: 10px 0;
 }
 .header-wrapper h2{
     font-weight: 500;

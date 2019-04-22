@@ -13,11 +13,13 @@ class AppLoaded extends Component {
         this.state = {
             selectedDataObj: this.props.weatherData.currently,
             isDaySummary: false,
-            isCelsius: true
+            isCelsius: true,
+            hourChartOffset: /*day*/0
         };
         this.unitSwitcher = this.unitSwitcher.bind(this);
         this.setSelectedDataObj = this.setSelectedDataObj.bind(this);
         this.setIsDaySummary = this.setIsDaySummary.bind(this);
+        this.setHourChartOffset = this.setHourChartOffset.bind(this);
     }
     getDisplayTime(timeStamp, isDayOnly) {
         const dateObj = new Date(timeStamp * 1000);
@@ -45,6 +47,9 @@ class AppLoaded extends Component {
     setIsDaySummary(trueOrFalse) {
         this.setState({isDaySummary: trueOrFalse})
     }
+    setHourChartOffset(day) {
+        this.setState({hourChartOffset: day})
+    }
     render() {
         const states = {
             isDaySummary: this.state.isDaySummary,
@@ -69,8 +74,12 @@ class AppLoaded extends Component {
                 <SelectedSummary {...injectProps}/>
                 <HourChart
                     objArray={this.props.weatherData.hourly.data}
+                    selectedDataObj={this.state.selectedDataObj}
                     isCelsius={this.state.isCelsius}
                     fToC={this.fToC}
+                    setSelectedDataObj={this.setSelectedDataObj}
+                    setIsDaySummary={this.setIsDaySummary}
+                    hourChartOffset={this.state.hourChartOffset}
                 />
 
                 <DayChart
@@ -79,6 +88,7 @@ class AppLoaded extends Component {
                     setSelectedDataObj={this.setSelectedDataObj}
                     setIsDaySummary={this.setIsDaySummary}
                     isCelsius={this.state.isCelsius}
+                    setHourChartOffset={this.setHourChartOffset}
                 />
             </React.Fragment>
         )
@@ -89,6 +99,7 @@ function Attributions(props) {
         <div className='attributions-wrapper grey'>
             <a href='https://darksky.net/poweredby/' target='_blank' rel='noopener noreferrer'>Powered by Dark Sky</a>
             <a href='https://locationiq.com/' target='_blank' rel='noopener noreferrer'>Search by LocationIQ.com</a>
+            <a href='https://erikflowers.github.io/weather-icons/' target='_blank' rel='noopener noreferrer'>The Weather Icons</a>
         </div>
     )
 }

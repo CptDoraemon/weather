@@ -1,6 +1,56 @@
 import React, { Component } from 'react';
 import './hour-chart.css';
 
+function UpperTextInChart(props) {
+    const tempTextInactive = {
+        fill: 'rgb(150, 150, 150)',
+        fontSize: '12px',
+        fontWeight: 700,
+        cursor: 'pointer',
+    };
+    const tempTextStyleActive = {
+        fill: 'rgb(0, 0, 0)',
+        fontSize: '12px',
+        fontWeight: 700
+    };
+    const style = props.obj.time === props.selectedDataObj.time ? tempTextStyleActive : tempTextInactive;
+    return (
+        <text
+            x={props.x}
+            y={props.y}
+            style={style}
+            onClick={() => {
+                props.setSelectedDataObj(props.obj);
+                props.setIsDaySummary(false)
+            }}
+        >{ props.text }</text>
+    )
+}
+function NoData(props) {
+    const style = {
+        fill: 'rgba(0, 0, 0, 0.1)',
+        fontSize: '16px',
+        fontWeight: 700,
+        textTransform: 'uppercase',
+    };
+    const array = [2, 3, 4, 5, 6];
+    return (
+        <React.Fragment>
+        {
+            array.map(i =>
+            <text
+                key={'nodata'+i}
+                x={props.wrapperWidth * (i + 0.5) + props.noDataCenterOffset}
+                y={props.svgHeight * 0.5}
+                style={style}
+                textAnchor='middle'
+            >Hourly forecasts are only available for next 48 hours</text>
+            )
+        }
+        </React.Fragment>
+    )
+}
+
 export default class HourChart extends Component {
     constructor(props) {
         super(props);
@@ -9,6 +59,7 @@ export default class HourChart extends Component {
         };
         this.tempMax = null;
         this.tempMin = null;
+        this.wrapperWidth = null;
         this.svgHeight = null;
         this.svgWidth = null;
         this.tempArray = null;
@@ -46,9 +97,8 @@ export default class HourChart extends Component {
         this.tempMin = tempArraySorted[0];
         //
         const wrapperStyle = window.getComputedStyle(this.wrapperRef.current, null);
-        const wrapperWidth = window.parseInt(wrapperStyle.getPropertyValue("width"));
-        console.log(wrapperWidth);
-        this.svgWidth = wrapperWidth * 8;
+        this.wrapperWidth = window.parseInt(wrapperStyle.getPropertyValue("width"));
+        this.svgWidth = this.wrapperWidth * 8;
         this.svgHeight = 100;
         this.xInterval = this.svgWidth / (24 * 8 - 1);
         //
@@ -56,7 +106,9 @@ export default class HourChart extends Component {
         this.bottomTextArea = 20;
         this.lowestTemperatureHeight = 10;
         //
-        this.setState({isReady: true})
+        this.setState({
+            isReady: true,
+        })
     }
     render() {
         // this.props.objArray;
@@ -67,7 +119,7 @@ export default class HourChart extends Component {
         const fillStyle = {
             fill: 'rgba(29, 161, 242, 0.5)'
         };
-        const textStyle = {
+        const timeTextStyle = {
             fill: 'rgb(150, 150, 150)',
             fontSize: '12px'
         };
@@ -94,8 +146,16 @@ export default class HourChart extends Component {
                                     {
                                         (index - 1) % 3 === 0 ?
                                             <React.Fragment>
-                                                <text x={lastX} y={last.tempText} style={textStyle}>{ temperature }</text>
-                                                <text x={lastX} y={last.timeText} style={textStyle}>{ hour }</text>
+                                                <UpperTextInChart
+                                                    x={lastX}
+                                                    y={last.tempText}
+                                                    text={temperature}
+                                                    obj={obj}
+                                                    selectedDataObj={this.props.selectedDataObj}
+                                                    setSelectedDataObj={this.props.setSelectedDataObj}
+                                                    setIsDaySummary={this.props.setIsDaySummary}
+                                                />
+                                                <text x={lastX} y={last.timeText} style={timeTextStyle}>{ hour }</text>
                                             </React.Fragment>
                                             : null
                                     }
@@ -108,10 +168,25 @@ export default class HourChart extends Component {
                 }
             </React.Fragment>
         );
+        // svg offset
+        let svgOffset;
+        const hourOrigin = new Date(this.props.objArray[0].time * 1000).getHours();
+        const firstDayOffset = (24 - hourOrigin) === 24 ? 0 : 24 - hourOrigin;
+        if (this.props.hourChartOffset === 0) {
+            svgOffset = 0;
+        } else if (this.props.hourChartOffset === 1) {
+            svgOffset = - firstDayOffset * this.xInterval
+        } else {
+            svgOffset = - (firstDayOffset + (this.props.hourChartOffset - 1) * 24) * this.xInterval
+        }
+        //
+        const noDataCenterOffset = firstDayOffset * this.xInterval;
+        //
         const svg = (
             <React.Fragment>
-                <svg height={this.svgHeight} width={this.svgWidth}>
+                <svg height={this.svgHeight} width={this.svgWidth} style={{transform: `translateX(${svgOffset}px)`}}>
                     { lines }
+                    <NoData wrapperWidth={this.wrapperWidth} svgHeight={this.svgHeight} noDataCenterOffset={noDataCenterOffset}/>
                 </svg>
             </React.Fragment>
         );

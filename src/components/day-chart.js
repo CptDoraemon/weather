@@ -5,7 +5,14 @@ import Icon from './icon';
 
 function Daily(props) {
     return (
-        <div className='daily-wrapper' onClick={()=>{props.setSelectedDataObj(props.obj);props.setIsDaySummary(true)}}>
+        <div
+            className='daily-wrapper'
+            onClick={()=>{
+                props.setSelectedDataObj(props.obj);
+                props.setIsDaySummary(true);
+                props.setHourChartOffset(props.dayIndex)
+            }}
+        >
             { props.time }
             <Icon width='50px' height='50px' icon={props.icon}/>
             <div className='daily-temp'>
@@ -22,7 +29,7 @@ export default class DayChart extends Component {
 
         return (
             <div className='daychart-wrapper quarter-height-wrapper'>
-                { this.props.objArray.map(obj => {
+                { this.props.objArray.map((obj, index) => {
                     const temperatureHigh = this.props.isCelsius ? Math.round(this.props.fToC(obj.temperatureHigh)) : Math.round(obj.temperatureHigh);
                     const temperatureLow = this.props.isCelsius ? Math.round(this.props.fToC(obj.temperatureLow)) : Math.round(obj.temperatureLow);
                     return (
@@ -35,6 +42,8 @@ export default class DayChart extends Component {
                             obj={obj}
                             setSelectedDataObj={this.props.setSelectedDataObj}
                             setIsDaySummary={this.props.setIsDaySummary}
+                            setHourChartOffset={this.props.setHourChartOffset}
+                            dayIndex={index}
                         />
                         )
                 }) }

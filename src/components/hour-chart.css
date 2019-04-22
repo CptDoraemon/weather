@@ -1,8 +1,9 @@
 .hour-chart-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
     padding: 0 10px;
     width: calc(100% - 20px);
+    overflow: hidden;
+}
+.hour-chart-wrapper svg {
+    transition: 0.5s;
+    transform: translateX(0px);
 }
