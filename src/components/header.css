@@ -1,7 +1,7 @@
 .header-wrapper {
     text-transform: capitalize;
     width: calc(100% - 20px);
-    margin: 0 10px;
+    margin: 10px;
 }
 .header-wrapper h1{
     font-weight: 500;
@@ -12,4 +12,18 @@
     font-weight: 500;
     font-size: 16px;
     margin: 2px 0;
+}
+@media screen and (max-width: 500px) {
+    .header-wrapper {
+        width: calc(100% - 10px);
+        margin: 5px;
+    }
+    .header-wrapper h1{
+        font-size: 18px;
+        margin: 5px 0;
+    }
+    .header-wrapper h2{
+        font-size: 12px;
+        margin: 2px 0;
+    }
 }

@@ -14,7 +14,7 @@ function Daily(props) {
             }}
         >
             { props.time }
-            <Icon width='50px' height='50px' icon={props.icon}/>
+            <Icon className='daily-icon' icon={props.icon}/>
             <div className='daily-temp'>
                 <span className='daily-temp-high'>{ props.temperatureHigh }&#176;</span>
                 <span className='daily-temp-low'>{ props.temperatureLow }&#176;</span>
@@ -28,7 +28,7 @@ export default class DayChart extends Component {
         const dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
         return (
-            <div className='daychart-wrapper quarter-height-wrapper'>
+            <div className='daychart-wrapper'>
                 { this.props.objArray.map((obj, index) => {
                     const temperatureHigh = this.props.isCelsius ? Math.round(this.props.fToC(obj.temperatureHigh)) : Math.round(obj.temperatureHigh);
                     const temperatureLow = this.props.isCelsius ? Math.round(this.props.fToC(obj.temperatureLow)) : Math.round(obj.temperatureLow);

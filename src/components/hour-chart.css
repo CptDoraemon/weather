@@ -2,6 +2,7 @@
     padding: 0 10px;
     width: calc(100% - 20px);
     overflow: hidden;
+    height: 150px;
 }
 .hour-chart-wrapper svg {
     transition: 0.5s;
@@ -37,4 +38,14 @@
 }
 .hour-chart-switcher-button-active:hover {
     background-color: rgba(0, 0, 0, 0.3);
+}
+@media screen and (max-width: 500px) {
+    .hour-chart-switcher-wrapper {
+        justify-content: center;
+    }
+    .hour-chart-switcher-button, .hour-chart-switcher-button-active {
+        padding: 5px 10px;
+        font-size: 10px;
+        font-weight: 500;
+    }
 }

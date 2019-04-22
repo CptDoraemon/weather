@@ -49,7 +49,7 @@ export default class HourChart extends Component {
     }
     render() {
         return (
-            <div className='hour-chart-wrapper quarter-height-wrapper' ref={this.wrapperRef}>
+            <div className='hour-chart-wrapper' ref={this.wrapperRef}>
                 <HourChartSwitcher setMode={this.setMode} mode={this.state.mode}/>
                 {
                     !this.state.isReady

@@ -21,7 +21,7 @@ function UnitSwitcher(props) {
 function SelectedSummaryLeft(props) {
     return (
         <div className='selected-summary-left-wrapper'>
-            <Icon icon={props.icon} width='80px' height='80px'/>
+            <Icon icon={props.icon} className='selected-summary-icon'/>
             <div className='selected-summary-temperature'> {props.temperature} </div>
             <UnitSwitcher unitSwitcher={props.unitSwitcher} isCelsius={props.isCelsius}/>
         </div>
@@ -50,7 +50,7 @@ export default class SelectedSummary extends Component {
         const windSpeed = this.props.isCelsius ? Math.round(this.props.mphToKmh(mph)) + ' km/h': Math.round(mph) + ' mph';
 
         return (
-            <div className='selected-summary-wrapper quarter-height-wrapper'>
+            <div className='selected-summary-wrapper'>
                 <SelectedSummaryLeft icon={this.props.selectedDataObj.icon} temperature={temperature} unitSwitcher={this.props.unitSwitcher} isCelsius={this.props.isCelsius}/>
                 <SelectedSummaryRight precipitation={precipitation} humidity={humidity} windSpeed={windSpeed}/>
             </div>

@@ -1,4 +1,6 @@
 .selected-summary-wrapper {
+    width: 100%;
+    margin: 20px 0;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -23,6 +25,11 @@
 .selected-summary-right-item {
     margin-bottom: 5px;
 }
+.selected-summary-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
 .selected-summary-temperature {
     font-size: 80px;
     line-height: 80px;
@@ -40,4 +47,21 @@
 .unit-switcher-button-active {
     color: black;
     cursor: auto;
+}
+@media screen and (max-width: 500px) {
+    .selected-summary-temperature {
+        font-size: 40px;
+        line-height: 40px;
+    }
+    .selected-summary-icon {
+        width: 40px;
+        height: 40px;
+    }
+    .unit-switcher-button-inactive, .unit-switcher-button-active {
+        font-size: 12px;
+    }
+    .selected-summary-right-item {
+        font-size: 10px;
+        margin-bottom: 1px;
+    }
 }

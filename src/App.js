@@ -107,14 +107,16 @@ function Attributions(props) {
 class App extends Component {
     render() {
         return (
-            <div className='app-wrapper'>
-                <div className='app-safe-area'>
-                { this.props.isFailed ? this.props.errorMessage
-                    : this.props.isLoaded ? <AppLoaded {...this.props} /> : <Loading />
-                }
+            <React.Fragment>
+                <div className='app-wrapper'>
+                    <div className='app-safe-area'>
+                    { this.props.isFailed ? this.props.errorMessage
+                        : this.props.isLoaded ? <AppLoaded {...this.props} /> : <Loading />
+                    }
+                    </div>
                 </div>
                 <Attributions />
-            </div>
+            </React.Fragment>
         )
     }
 }
