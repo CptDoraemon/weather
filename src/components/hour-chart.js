@@ -28,8 +28,8 @@ function UpperTextInChart(props) {
 }
 function NoData(props) {
     const style = {
-        fill: 'rgba(0, 0, 0, 0.1)',
-        fontSize: '16px',
+        fill: 'rgba(0, 0, 0, 0.2)',
+        fontSize: '14px',
         fontWeight: 700,
         textTransform: 'uppercase',
     };
@@ -150,7 +150,7 @@ export default class HourChart extends Component {
                                                     x={lastX}
                                                     y={last.tempText}
                                                     text={temperature}
-                                                    obj={obj}
+                                                    obj={this.props.objArray[index - 1]}
                                                     selectedDataObj={this.props.selectedDataObj}
                                                     setSelectedDataObj={this.props.setSelectedDataObj}
                                                     setIsDaySummary={this.props.setIsDaySummary}
