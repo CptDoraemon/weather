@@ -77,6 +77,7 @@ class AppLoaded extends Component {
                     selectedDataObj={this.state.selectedDataObj}
                     isCelsius={this.state.isCelsius}
                     fToC={this.fToC}
+                    mphToKmh={this.mphToKmh}
                     setSelectedDataObj={this.setSelectedDataObj}
                     setIsDaySummary={this.setIsDaySummary}
                     hourChartOffset={this.state.hourChartOffset}
