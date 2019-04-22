@@ -1,5 +1,5 @@
 .hour-chart-wrapper {
-    padding: 0 10px;
+    margin: 0 10px;
     width: calc(100% - 20px);
     overflow: hidden;
     height: 150px;
