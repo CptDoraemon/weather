@@ -98,9 +98,9 @@ class AppLoaded extends Component {
 function Attributions(props) {
     return (
         <div className='attributions-wrapper grey'>
-            <a href='https://darksky.net/poweredby/' target='_blank' rel='noopener noreferrer'>Powered by Dark Sky</a>
-            <a href='https://locationiq.com/' target='_blank' rel='noopener noreferrer'>Search by LocationIQ.com</a>
-            <a href='https://erikflowers.github.io/weather-icons/' target='_blank' rel='noopener noreferrer'>The Weather Icons</a>
+            <a href='https://darksky.net/poweredby/' target='_blank' rel='noopener noreferrer'>Weather data powered by Dark Sky</a>
+            <a href='https://locationiq.com/' target='_blank' rel='noopener noreferrer'>Location data search by LocationIQ.com</a>
+            <a href='https://erikflowers.github.io/weather-icons/' target='_blank' rel='noopener noreferrer'>Icons by The Weather Icons</a>
         </div>
     )
 }
