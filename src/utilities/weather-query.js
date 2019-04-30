@@ -14,7 +14,7 @@ export default function withWeatherQuery(WrappedComponent) {
             this.geoData = null;
             this.errorMessage = '';
             this.sendQuery = this.sendQuery.bind(this);
-            this.useMockLoacation = this.useMockLoacation.bind(this);
+            this.useMockLocation = this.useMockLocation.bind(this);
             this.getGeoLocation = this.getGeoLocation.bind(this);
         }
 
@@ -39,7 +39,7 @@ export default function withWeatherQuery(WrappedComponent) {
                     longitude: this.longitude
                 })
             };
-
+            console.log('fetching weather');
             fetch(origin + 'api/weather', fetchOptions)
                 .then(res => res.json())
                 .then(json => {
@@ -55,6 +55,7 @@ export default function withWeatherQuery(WrappedComponent) {
                 })
                 .catch(e => console.log(e));
 
+            console.log('fetching geocoding');
             fetch(origin + 'api/reversegeocoding', fetchOptions)
                 .then(res => res.json())
                 .then(json => {
@@ -70,24 +71,26 @@ export default function withWeatherQuery(WrappedComponent) {
                 })
                 .catch(e => console.log(e))
         }
-        useMockLoacation() {
+        useMockLocation() {
             // in case of geolocation no available or denied
             this.latitude = 43.70011;
             this.longitude = -79.4163;
             this.sendQuery()
         }
         getGeoLocation() {
+            console.log('getting geolocation');
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition((position) => {
                     this.latitude = position.coords.latitude;
                     this.longitude = position.coords.longitude;
                     this.sendQuery()
-                }, this.useMockLoacation);
+                }, this.useMockLocation);
             } else {
-                this.useMockLoacation();
+                this.useMockLocation();
             }
         }
         componentDidMount() {
+            console.log('mounted');
             this.getGeoLocation()
         }
         render() {
