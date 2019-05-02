@@ -43,7 +43,7 @@ export default class Loading extends Component{
         return (
             <div className='loading-wrapper grey'>
                 <div className={timeoutWrapper}>
-                    <div className='loading-timeout-message'>This app relies on free tiers of the weather and geocoding API services, the responses can be slow sometimes.</div>
+                    <div className='loading-timeout-message'>Looking up geolocation can be slow sometimes</div>
                 </div>
                 <div className='loading-text-wrapper grey'>
                     { spanArray }

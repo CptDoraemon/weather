@@ -39,13 +39,11 @@ export default function withWeatherQuery(WrappedComponent) {
                     longitude: this.longitude
                 })
             };
-            console.log('fetching weather');
             fetch(origin + 'api/weather', fetchOptions)
                 .then(res => res.json())
                 .then(json => {
                     if (json.status === 'success') {
                         this.weatherData = json.data;
-                        console.log(json.data);
                         isWeatherReady = true;
                         if (isWeatherReady && isGeocodingReady) this.setState({isLoaded: true})
                     } else {
@@ -55,7 +53,6 @@ export default function withWeatherQuery(WrappedComponent) {
                 })
                 .catch(e => console.log(e));
 
-            console.log('fetching geocoding');
             fetch(origin + 'api/reversegeocoding', fetchOptions)
                 .then(res => res.json())
                 .then(json => {
@@ -78,7 +75,6 @@ export default function withWeatherQuery(WrappedComponent) {
             this.sendQuery()
         }
         getGeoLocation() {
-            console.log('getting geolocation');
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition((position) => {
                     this.latitude = position.coords.latitude;
@@ -90,7 +86,6 @@ export default function withWeatherQuery(WrappedComponent) {
             }
         }
         componentDidMount() {
-            console.log('mounted');
             this.getGeoLocation()
         }
         render() {
