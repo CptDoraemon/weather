@@ -43,6 +43,7 @@ export default function withWeatherQuery(WrappedComponent) {
                 .then(res => res.json())
                 .then(json => {
                     if (json.status === 'success') {
+                        console.log(json.data);
                         this.weatherData = json.data;
                         isWeatherReady = true;
                         if (isWeatherReady && isGeocodingReady) this.setState({isLoaded: true})
@@ -57,8 +58,8 @@ export default function withWeatherQuery(WrappedComponent) {
                 .then(res => res.json())
                 .then(json => {
                     if (json.status === 'success') {
-                        this.geoData = json.data;
                         console.log(json.data);
+                        this.geoData = json.data;
                         isGeocodingReady = true;
                         if (isWeatherReady && isGeocodingReady) this.setState({isLoaded: true})
                     } else {
