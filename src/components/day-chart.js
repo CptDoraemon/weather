@@ -24,21 +24,29 @@ function Daily(props) {
 }
 
 export default class DayChart extends Component {
+
+    dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    getTemperature(temp) {
+      if (temp === undefined) {
+        return '?'
+      }
+      const result = this.props.isCelsius ? this.props.fToC(temp) : temp;
+      return Math.round(result);
+    }
+
     render() {
-        const dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
         return (
             <div className='daychart-wrapper'>
                 { this.props.objArray.map((obj, index) => {
-                    const temperatureHigh = this.props.isCelsius ? Math.round(this.props.fToC(obj.temperatureHigh)) : Math.round(obj.temperatureHigh);
-                    const temperatureLow = this.props.isCelsius ? Math.round(this.props.fToC(obj.temperatureLow)) : Math.round(obj.temperatureLow);
                     return (
                         <Daily
                             key={obj.time}
                             icon={obj.icon}
-                            time={dayName[(new Date(obj.time * 1000)).getDay()]}
-                            temperatureHigh={temperatureHigh}
-                            temperatureLow={temperatureLow}
+                            time={this.dayName[(new Date(obj.time * 1000)).getDay()]}
+                            temperatureHigh={this.getTemperature(obj.temperatureHigh)}
+                            temperatureLow={this.getTemperature(obj.temperatureLow)}
                             obj={obj}
                             setSelectedDataObj={this.props.setSelectedDataObj}
                             setIsDaySummary={this.props.setIsDaySummary}
